@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="todo.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div id="header" class="d-flex align-items-center">
+            
+            <img src="time.jpg" alt="Logo" class="header-logo me-3">
+            <div>
+                <h1>To-Do List App</h1>
+                <p>"The secret of getting ahead is getting started." - Mark Twain</p>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="input-group mb-3">
+                <input type="text" id="taskInput" class="form-control" placeholder="Enter your tasks">
+                
+            </div>
+            <div>
+                <button class="btn btn-primary" id="addTask">Add Task</button><br><br>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-secondary" id="showAll">All Tasks</button>
+                <button class="btn btn-secondary" id="showPending">Pending</button>
+                <button class="btn btn-secondary" id="showCompleted">Completed</button>
+            </div>
+            <ul class="list-group" id="taskList"></ul>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            const saveTasks = () => localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            const renderTasks = (filter = "all") => {
+                $('#taskList').empty();
+                tasks.forEach((task, index) => {
+                    if (filter === "all" || filter === task.status) {
+                        const taskItem = $(`
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span class="${task.status === 'completed' ? 'text-decoration-line-through' : ''}">
+                                    ${task.name}
+                                </span>
+                                <div>
+                                    <button class="btn btn-success btn-sm completeBtn" data-index="${index}">
+                                        Complete
+                                    </button>
+                                    <button class="btn btn-danger btn-sm deleteBtn" data-index="${index}">
+                                        Delete
+                                    </button>
+                                </div>
+                            </li>
+                        `);
+                        $('#taskList').append(taskItem);
+                    }
+                });
+            };
+
+            $('#addTask').click(function () {
+                const taskInput = $('#taskInput').val().trim();
+                if (taskInput) {
+                    tasks.push({ name: taskInput, status: 'pending' });
+                    saveTasks();
+                    renderTasks();
+                    $('#taskInput').val('');
+                }
+            });
+
+            $(document).on('click', '.completeBtn', function () {
+                const index = $(this).data('index');
+                tasks[index].status = 'completed';
+                saveTasks();
+                renderTasks();
+            });
+
+            $(document).on('click', '.deleteBtn', function () {
+                const index = $(this).data('index');
+                tasks.splice(index, 1);
+                saveTasks();
+                renderTasks();
+            });
+
+            $('#showAll').click(() => renderTasks("all"));
+            $('#showPending').click(() => renderTasks("pending"));
+            $('#showCompleted').click(() => renderTasks("completed"));
+
+            renderTasks();
+        });
+    </script>
+</body>
+</html>

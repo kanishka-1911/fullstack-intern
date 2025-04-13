@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Image Gallery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-style: italic;
+            margin: 0;
+            padding: 0;
+            background-color: #f0e68cea;
+            color: #5c4033;
+        }
+       
+        h1 {
+            text-align: center;
+            color: #8b4513;
+            margin: 20px 0;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 10px;
+        }
+        .gallery img {
+            width: 80%;
+            height: auto;
+            border: 2px solid #612c06; 
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            border: 3px solid #8b4513;
+        }
+        .lightbox .nav {
+            position: absolute;
+            top: 50%;
+            font-size: 2rem;
+            color: #f5f5dc;
+            cursor: pointer;
+        }
+        .lightbox .prev {
+            left: 10%;
+        }
+        .lightbox .next {
+            right: 10%;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2rem;
+            color: #f5f5dc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coffee types </h1>
+    <div class="gallery">
+        <div>
+        <img src="c1.webp" alt="Coffee1">
+        <p><b>Cappuccino</b></p>
+        <p> Italian coffee, cappuccino is an espresso-based java that comes from an Austrian drink called kapuziner </p>
+        </div>
+        <div>
+        <img src="c2.webp" alt="Coffee2">
+        <p><b>Cortado</b></p>
+        <p>A smaller version of a cappuccino, Roasty Coffee says that a cortado has just enough milk "to cut" the espresso and its acidity.</p>
+
+        </div>
+        <div>
+        <img src="c3.webp" alt="Coffee3">
+        <p><b>Latte</b></p>
+        <P>the latte was fashioned to be a less intense and considerably more milky version of a cappuccino for not-so-strong coffee-loving Americans.</P>
+        </div>
+        <div>
+            <img src="c4.webp" alt="Coffee4">
+            <p><b>Mocha</b></p>
+            <p>mocha is made from similar layers of espresso, milk, and chocolate.</p>
+        </div>
+      <div>
+        <img src="c5.webp" alt="Coffee5">
+        <p><b>Raf</b></p>
+        <p>Raf coffee originated in mid-1990 Russia when Rafael Timerbaev walked into a Coffee Bean outlet asking for a "good cup of coffee with milk"</p>
+      </div>
+      <div>
+        <img src="c6.webp" alt="Coffee6">
+        <p><b>Macchiato</b></p>
+        <p>a macchiato is a shot of espresso with just a dash of milk to mellow its intensity</p>
+      </div>
+        <div>
+            <img src="c7.webp" alt="Coffee6">
+            <p><b>Cold Brew</b></p>
+            <p>cold brew is made by steeping coffee grounds in cold or room temperature water for at least 12 hours</p>
+        </div>
+       <div>
+        <img src="c8.webp" alt="Coffee6">
+        <p><b>Espresso Con Panna</b></p>
+        <p> Espresso con panna is a shot of espresso served with a swirl of whipped cream on top.</p>
+       </div>
+       <div>
+        <img src="c9.webp" alt="Coffee6">
+        <p><b>Turkish coffee</b></p>
+        <p>Turkish coffee, or Türk kahvesi, is brewed in a unique metal pot with a long handle called cezve (via Lonely Planet). Instead of a flame or an electric machine, the coffee is let to boil in the cezve over hot sand till it just about spills, and is then served in a standard-sized cup.</p>
+       </div>
+    </div>
+    <div class="lightbox" id="lightbox">
+        <span class="close">&times;</span>
+        <span class="nav prev">&#8249;</span>
+        <span class="nav next">&#8250;</span>
+        <img src="" alt="Lightbox Image">
+    </div>
+    <script>
+        const galleryImages = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = lightbox.querySelector('img');
+        const prevButton = lightbox.querySelector('.prev');
+        const nextButton = lightbox.querySelector('.next');
+        const closeButton = lightbox.querySelector('.close');
+        
+        let currentIndex = 0;
+        
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImage.src = galleryImages[index].src;
+            lightbox.style.display = 'flex';
+        }
+        
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+        }
+        
+        function navigateLightbox(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+            if (currentIndex >= galleryImages.length) currentIndex = 0;
+            lightboxImage.src = galleryImages[currentIndex].src;
+        }
+        
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => openLightbox(index));
+        });
+        
+        closeButton.addEventListener('click', closeLightbox);
+        prevButton.addEventListener('click', () => navigateLightbox(-1));
+        nextButton.addEventListener('click', () => navigateLightbox(1));
+    </script>
+</body>
+</html>

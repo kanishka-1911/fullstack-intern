@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanishka's Portfolio</title>
+    <link rel="stylesheet" href="port.css">
+    <script>
+        function showSection(id) {
+            var sections = document.querySelectorAll("section");
+            sections.forEach(section => section.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Kanishka M</h1>
+        <p>AI & Data Science Enthusiast | Problem Solver | Public Speaker</p>
+    </header>
+    
+    <nav>
+        <a href="#" onclick="showSection('about')">About Me</a>
+        <a href="#" onclick="showSection('skills')">Skills</a>
+        <a href="#" onclick="showSection('projects')">Projects</a>
+        <a href="#" onclick="showSection('education')">Education</a>
+        <a href="#" onclick="showSection('contact')">Contact</a>
+    </nav>
+    
+    <section id="about" class="active">
+        <h2>About Me</h2><br><br>
+        <div class="about-container">
+            <img src="me.jpeg" alt="My Photo" class="about-img">
+            <p class="about-text">
+                I'm Kanishka, an undergraduate student pursuing a Bachelor of Technology in Artificial Intelligence and Data Science. With a deep passion for problem-solving through technology, I have worked on projects that tackle real-world issues, such as developing prototype for motorbike safety.I am a enthusistic public speaker.Inspired by the evolving role of AI in society, I aim to contribute to innovations that foster inclusivity and sustainability. Beyond academics participating in public speaking events. My journey is driven by a vision to bridge the gap between cutting-edge technology and its practical application for the greater good.
+            </p>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <strong>Public Speaking:</strong> I participated in youth talk summit conducted by ICT academy and was shortlisted for round 2 </li>
+           <li><strong>Problem Solving:</strong>I created a website for blood bank management system using java </li>
+        </ul>
+    </section>
+    
+    <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li><strong>AI-Based Water Cleaning Bot</strong> - A bot that collects floating debris from water bodies.It also separates wastes as biodegradable and non biodegradable</li>
+            <li><strong>Comprehensive Rider Safety</strong> - Ensuring motorbike safety through helmet detection ,alcohol testing and ensures side stand position</li>
+        </ul>
+        
+    </section>
+    
+    <section id="education">
+        <h2>Education</h2>
+        <p><strong>Sri Swamy International School, Salem</strong> - scored 96% in grade 10 and 87% in grade 12</p>
+        <p><strong>Knowledge Institute of Technology</strong> - Pursuing B.Tech in AI & DS</p>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Me</h2><br>
+        <a class="deco" href="mailto: kanishkaa1911@gmail.com"  target="_blank">Email</a><br><br>
+        <a class="deco" href="https://www.linkedin.com/in/kanishka-m-b7aab3306" target="_blank">LinkedIn</a><br><br>
+        <a class="deco"href="https://github.com/kanishka-1911"  target="_blank">GitHub</a>
+    </section>
+</body>
+</html>
